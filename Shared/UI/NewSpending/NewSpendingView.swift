@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
-import Introspect
+import Resolver
 
 struct NewSpendingView: View {
+    private let category: Category
+    @ObservedObject private var createSpendingViewModel = CreateSpendingViewModel()
+    
     let date: Date
     let dateFormatter: DateFormatter
     
-    init() {
+    init(category: Category) {
+        self.category = category
         date = Date()
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
@@ -21,23 +25,28 @@ struct NewSpendingView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            TextField("Введите сумму", text: .constant(""))
+            TextField("Введите сумму", text: $createSpendingViewModel.amount)
                 .padding()
                 .font(.largeTitle)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
-            Button(action: {}, label: {
+            
+            Button(action: self.createSpending, label: {
                 Text("Создать")
-            })
+            }).disabled(!self.createSpendingViewModel.isValid)
         }
         .navigationTitle(
             Text(date, formatter: dateFormatter)
         )
     }
+    
+    func createSpending() {
+        self.createSpendingViewModel.createSpending(category: category)
+    }
 }
 
 struct NewSpendingView_Previews: PreviewProvider {
     static var previews: some View {
-        NewSpendingView()
+        NewSpendingView(category: Category(name: "Bla"))
     }
 }

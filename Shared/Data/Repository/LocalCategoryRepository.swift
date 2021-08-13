@@ -6,21 +6,28 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
+
+private var storage: [Category] = [
+    Category(name: "Я"),
+    Category(name: "Семья"),
+    Category(name: "Мой дом"),
+    Category(name: "Мое дело"),
+    Category(name: "Хобби"),
+]
 
 public class LocalCategoryRepository: CategoryRepository {
-    var storage: [Category] = []
-    
-    public func saveCategory(cat: Category) -> Single<Void> {
-        return Single<Void>.create { single in
-            self.storage.append(cat)
-            single(.success(()))
-            return Disposables.create {}
-        }
+    public func saveCategory(cat: Category) -> AnyPublisher<Void, Error> {
+        return Future { promise in
+            storage.append(cat)
+            return promise(.success(()))
+        }.eraseToAnyPublisher()
     }
     
-    public func getCategories() -> Observable<[Category]> {
-        return Observable.just(self.storage)
+    public func getCategories() -> AnyPublisher<[Category], Error> {
+        return Future { promise in
+            return promise(.success(storage))
+        }.eraseToAnyPublisher()
     }
     
 }

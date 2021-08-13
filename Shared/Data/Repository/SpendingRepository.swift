@@ -6,8 +6,12 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 
 public protocol SpendingRepository {
-    func save(spending: Spending) -> Single<Void>
+    func save(spending: Spending) -> AnyPublisher<Void, Error>
+    
+    func getAll() -> AnyPublisher<[Spending], Error>
+    
+    func getGroupedByCategory() -> AnyPublisher<[String : [Spending]], Error>
 }

@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 
 public protocol CategoryRepository {
-    func saveCategory(cat: Category) -> Single<Void>
+    func saveCategory(cat: Category) -> AnyPublisher<Void, Error>
     
-    func getCategories() -> Observable<[Category]>
+    func getCategories() -> AnyPublisher<[Category], Error>
 }
