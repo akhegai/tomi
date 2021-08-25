@@ -52,7 +52,6 @@ extension HomeViewModel {
             }
             return (cat, 0)
         }
-        print(items)
         return items
     }
 }

@@ -44,7 +44,7 @@ extension CreateSpendingViewModel {
     }
     
     func createSpending(category: Category) {
-        spendingRepository.save(spending: Spending(amount: Double(self.amount)!, categoryId: category.id))
+        spendingRepository.save(spending: Spending(amount: Double(self.amount)!, categoryId: category.id, date: Date()))
             .receive(on: RunLoop.main)
             .map({ true })
             .replaceError(with: false)

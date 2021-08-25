@@ -9,6 +9,8 @@ import SwiftUI
 import Resolver
 
 struct NewSpendingView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     private let category: Category
     @ObservedObject private var createSpendingViewModel = CreateSpendingViewModel()
     
@@ -42,6 +44,7 @@ struct NewSpendingView: View {
     
     func createSpending() {
         self.createSpendingViewModel.createSpending(category: category)
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
 

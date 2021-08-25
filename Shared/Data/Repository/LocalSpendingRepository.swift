@@ -7,25 +7,30 @@
 
 import Foundation
 import Combine
-
-private var storage: [Spending] = []
+import RealmSwift
 
 public class LocalSpendingRepository: SpendingRepository {
     
-
+    let realm = try! Realm()
+    
     public func save(spending: Spending) -> AnyPublisher<Void, Error> {
         Future { promise in
-            storage.append(spending)
+            try! self.realm.write {
+                self.realm.add(StorableSpending(spending))
+            }
             return promise(.success(()))
         }.eraseToAnyPublisher()
     }
-    
+
     public func getAll() -> AnyPublisher<[Spending], Error> {
-        Future { promise in
-            return promise(.success(storage))
+        let spendings = realm.objects(StorableSpending.self)
+        return RealmPublishers.collection(from: spendings).map { results in
+            Array(results.map({ storable in
+                storable.toModel()
+            }))
         }.eraseToAnyPublisher()
     }
-    
+
     public func getGroupedByCategory() -> AnyPublisher<[String : [Spending]], Error> {
         self.getAll()
             .map({ storage in

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D578DE026D11D46000C34C7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3D578DDF26D11D46000C34C7 /* RealmSwift */; };
 		3D70057626AAB3A70064809A /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D70057526AAB3A70064809A /* Tests_iOS.swift */; };
 		3D70058126AAB3A70064809A /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D70058026AAB3A70064809A /* Tests_macOS.swift */; };
 		3D70058326AAB3A70064809A /* tomiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D70055A26AAB3A60064809A /* tomiApp.swift */; };
@@ -29,6 +30,8 @@
 		3D980B4426C2962700000646 /* ResolverRegistering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D980B4226C274B700000646 /* ResolverRegistering.swift */; };
 		3D980B4726C29E3100000646 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 3D980B4626C29E3100000646 /* Resolver */; };
 		3D980B5526C6745C00000646 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D980B5426C6745C00000646 /* HomeViewModel.swift */; };
+		3DA6184B26D2593E00413EED /* StorableSpending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6184A26D2593E00413EED /* StorableSpending.swift */; };
+		3DA6185026D4BA2C00413EED /* RealmPublishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6184F26D4BA2C00413EED /* RealmPublishers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +91,8 @@
 		3D980B4026C2739100000646 /* CreateSpendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpendingViewModel.swift; sourceTree = "<group>"; };
 		3D980B4226C274B700000646 /* ResolverRegistering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolverRegistering.swift; sourceTree = "<group>"; };
 		3D980B5426C6745C00000646 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3DA6184A26D2593E00413EED /* StorableSpending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableSpending.swift; sourceTree = "<group>"; };
+		3DA6184F26D4BA2C00413EED /* RealmPublishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPublishers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D578DE026D11D46000C34C7 /* RealmSwift in Frameworks */,
 				3D980B4726C29E3100000646 /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +213,7 @@
 		3D70059E26AAC3A50064809A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3DA6184E26D4BA0400413EED /* Realm */,
 				3D70059F26AAC3B80064809A /* Repository */,
 				3D70059726AAB9C20064809A /* Model */,
 			);
@@ -216,6 +223,7 @@
 		3D70059F26AAC3B80064809A /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				3DA6184926D2592F00413EED /* Storable */,
 				3D7005A026AAC48D0064809A /* SpendingRepository.swift */,
 				3D7005A226AAC59D0064809A /* LocalSpendingRepository.swift */,
 				3D7005A426AAC9030064809A /* CategoryRepository.swift */,
@@ -259,6 +267,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3DA6184926D2592F00413EED /* Storable */ = {
+			isa = PBXGroup;
+			children = (
+				3DA6184A26D2593E00413EED /* StorableSpending.swift */,
+			);
+			path = Storable;
+			sourceTree = "<group>";
+		};
+		3DA6184E26D4BA0400413EED /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				3DA6184F26D4BA2C00413EED /* RealmPublishers.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -278,6 +302,7 @@
 			name = "tomi (iOS)";
 			packageProductDependencies = (
 				3D980B4626C29E3100000646 /* Resolver */,
+				3D578DDF26D11D46000C34C7 /* RealmSwift */,
 			);
 			productName = "tomi (iOS)";
 			productReference = 3D70056126AAB3A70064809A /* tomi.app */;
@@ -372,6 +397,7 @@
 			mainGroup = 3D70055426AAB3A60064809A;
 			packageReferences = (
 				3D980B4526C29E3100000646 /* XCRemoteSwiftPackageReference "Resolver" */,
+				3D578DDE26D11D46000C34C7 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 3D70056226AAB3A70064809A /* Products */;
 			projectDirPath = "";
@@ -425,9 +451,11 @@
 			files = (
 				3D7005AC26AADE200064809A /* HomeView.swift in Sources */,
 				3D7005C026AAF7150064809A /* CategoryRowView.swift in Sources */,
+				3DA6185026D4BA2C00413EED /* RealmPublishers.swift in Sources */,
 				3D7005A126AAC48D0064809A /* SpendingRepository.swift in Sources */,
 				3D980B4326C274B700000646 /* ResolverRegistering.swift in Sources */,
 				3D7005C426AAFA810064809A /* NewSpendingView.swift in Sources */,
+				3DA6184B26D2593E00413EED /* StorableSpending.swift in Sources */,
 				3D7005A726AAC9550064809A /* LocalCategoryRepository.swift in Sources */,
 				3D70059926AABA080064809A /* Spending.swift in Sources */,
 				3D980B4126C2739100000646 /* CreateSpendingViewModel.swift in Sources */,
@@ -818,6 +846,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D578DDE26D11D46000C34C7 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.12.0;
+			};
+		};
 		3D980B4526C29E3100000646 /* XCRemoteSwiftPackageReference "Resolver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver.git";
@@ -829,6 +865,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D578DDF26D11D46000C34C7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D578DDE26D11D46000C34C7 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		3D980B4626C29E3100000646 /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D980B4526C29E3100000646 /* XCRemoteSwiftPackageReference "Resolver" */;
